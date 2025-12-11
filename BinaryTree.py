@@ -70,3 +70,22 @@ class BinaryTree:
 
     def longest_path(self):
         return self.longest_path_recursive(self.root, 1)
+
+
+if __name__ == "__main__":
+    import random
+    import time
+    totalValues = 5000
+    values = [random.randint(1, 10000) for _ in range(totalValues)]
+    startTime = time.time()
+    tree = BinaryTree(values)
+    endTime = time.time()
+    print(f"Inserted {totalValues} values into the BinaryTree in {endTime - startTime:.6f} seconds.")
+    print("Longest path in the tree:", tree.longest_path())
+    sampleValue = values[random.randint(0, totalValues - 1)]
+    print("Sample value to count:", sampleValue)
+    print(f"Count of value {sampleValue} in the tree:", tree.count(sampleValue))
+    print("Finding value 99999 in the tree:", tree.find(99999))
+    print(f"Count of value 99999 in the tree:", tree.count(99999))
+
+

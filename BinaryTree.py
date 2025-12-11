@@ -59,3 +59,14 @@ class BinaryTree:
     
     def count(self, value):
         return self.count_recursive(self.root, value)
+
+    def longest_path_recursive(self, currentNode, currentDepth):
+        if currentNode is None:
+            return currentDepth - 1
+        
+        leftDepth = self.longest_path_recursive(currentNode.left, currentDepth + 1)
+        rightDepth = self.longest_path_recursive(currentNode.right, currentDepth + 1)
+        return max(leftDepth, rightDepth)
+
+    def longest_path(self):
+        return self.longest_path_recursive(self.root, 1)

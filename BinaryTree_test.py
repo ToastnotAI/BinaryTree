@@ -152,5 +152,34 @@ class TestBinaryTree(unittest.TestCase):
         self.assertEqual(tree.count(25), 3)
         self.assertEqual(tree.count(30), 1)
         self.assertEqual(tree.count(40), 0)
+
+    def test_longest_path_one_node(self):
+        tree = BinaryTree()
+        tree.insert(Node(10))
+        longest_path = tree.longest_path()
+        self.assertEqual(longest_path, 1)  # Only root node
+
+    def test_longest_path_in_tree(self):
+        values = [50, 30, 70, 20, 40, 60, 80, 10]
+        tree = BinaryTree(values)
+        longest_path = tree.longest_path()
+        self.assertEqual(longest_path, 4)  # Path: 50 -> 30 -> 20 -> 10
+
+    def test_longest_path_empty_tree(self):
+        tree = BinaryTree()
+        longest_path = tree.longest_path()
+        self.assertEqual(longest_path, 0)  # No nodes in the tree
+
+    def test_longest_path_left_heavy_tree(self):
+        values = [100, 90, 80, 70, 60]
+        tree = BinaryTree(values)
+        longest_path = tree.longest_path()
+        self.assertEqual(longest_path, 5)  # Path: 100 -> 90 -> 80 -> 70 -> 60
+    
+    def test_longest_path_right_heavy_tree(self):
+        values = [10, 20, 30, 40, 50]
+        tree = BinaryTree(values)
+        longest_path = tree.longest_path()
+        self.assertEqual(longest_path, 5)  # Path: 10 -> 20 -> 30 -> 40 -> 50
     
         

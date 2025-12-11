@@ -3,13 +3,17 @@ class Node:
         self.value = value
         self.left = None
         self.right = None
+        self.count = 1
     
     
 class BinaryTree:
     root = None
 
     def insert_recursive(self, currentNode, newNode):
-        if newNode.value < currentNode.value:
+        if currentNode.value == newNode.value:
+            currentNode.count += 1
+        
+        elif newNode.value < currentNode.value:
             if currentNode.left is None:
                 currentNode.left = newNode
             else:

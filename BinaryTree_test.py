@@ -16,6 +16,12 @@ class TestBinaryTreeNode(unittest.TestCase):
         self.assertIsNone(node.left)
         self.assertIsNone(node.right)
 
+    def test_count_instances_of_value(self):
+        node = Node(15)
+        node.count += 1 # incrementing count attribute manually for testing
+        self.assertEqual(node.count, 2)
+
+
 
 class TestBinaryTree(unittest.TestCase):
 
@@ -101,9 +107,18 @@ class TestBinaryTree(unittest.TestCase):
         self.assertEqual(tree.root.left.right.value, 40) #40 > 30 < 50
         self.assertEqual(tree.root.right.left.value, 60) #60 < 70 > 50
         self.assertEqual(tree.root.right.right.value, 80) #80 > 70 > 50
-    
 
 
+    # Duplicates utilise the count attribute of Node to track occurrences to reduce time complexity of tree.
+    def test_insert_duplicate_values(self):
+        tree = BinaryTree()
+        tree.insert(Node(10))
+        tree.insert(Node(10))
+
+        self.assertEqual(tree.root.value, 10)
+        self.assertIsNone(tree.root.left)
+        self.assertIsNone(tree.root.right)
+        self.assertEqual(tree.root.count, 2)
 
     
 

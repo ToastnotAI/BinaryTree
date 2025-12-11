@@ -37,12 +37,21 @@ class TestBinaryTree(unittest.TestCase):
         self.assertEqual(tree.root.value, 20)
 
     def test_add_single_left_child(self):
-        tree= BinaryTree()
+        tree = BinaryTree()
         tree.root = Node(30)
         left_child = Node(15)
         tree.insert(left_child)
         self.assertEqual(tree.root.left, left_child)
+        self.assertLess(tree.root.left.value, tree.root.value)
 
+    def test_add_single_right_child(self):
+        tree = BinaryTree()
+        tree.root = Node(30)
+        right_child = Node(45)
+        tree.insert(right_child)
+        self.assertEqual(tree.root.right, right_child)
+        self.assertGreater(tree.root.right.value, tree.root.value)
+        
 
     
 

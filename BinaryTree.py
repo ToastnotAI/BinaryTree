@@ -12,4 +12,7 @@ class BinaryTree:
         if self.root is None:
             self.root = new_node
         else:
-            self.root.left = new_node
+            if new_node.value < self.root.value:
+                self.root.left = new_node
+            else:
+                self.root.right = new_node

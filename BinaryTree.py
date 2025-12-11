@@ -8,11 +8,21 @@ class Node:
 class BinaryTree:
     root = None
 
-    def insert(self, new_node):
-        if self.root is None:
-            self.root = new_node
-        else:
-            if new_node.value < self.root.value:
-                self.root.left = new_node
+    def insert_recursive(self, currentNode, newNode):
+        if newNode.value < currentNode.value:
+            if currentNode.left is None:
+                currentNode.left = newNode
             else:
-                self.root.right = new_node
+                self.insert_recursive(currentNode.left, newNode)
+        
+        else:
+            if currentNode.right is None:
+                currentNode.right = newNode
+            else:
+                self.insert_recursive(currentNode.right, newNode)
+                
+    def insert(self, newNode):
+        if self.root is None:
+            self.root = newNode
+        else:
+            self.insert_recursive(self.root, newNode)

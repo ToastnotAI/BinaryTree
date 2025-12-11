@@ -75,17 +75,23 @@ class BinaryTree:
 if __name__ == "__main__":
     import random
     import time
+    def timeFunction(func, *args):
+        startTime = time.time()
+        result = func(*args)
+        endTime = time.time()
+        return result, endTime - startTime
+
     totalValues = 5000
     values = [random.randint(1, 10000) for _ in range(totalValues)]
-    startTime = time.time()
-    tree = BinaryTree(values)
-    endTime = time.time()
-    print(f"Inserted {totalValues} values into the BinaryTree in {endTime - startTime:.6f} seconds.")
-    print("Longest path in the tree:", tree.longest_path())
-    sampleValue = values[random.randint(0, totalValues - 1)]
+    tree, timeTaken = timeFunction(BinaryTree, values)
+    print(f"Inserted {totalValues} values into the BinaryTree in {timeTaken:.6f} seconds.")
+    longestPath, timeTaken = timeFunction(tree.longest_path)
+    print(f"Longest path in the tree is {longestPath}. Computed in {timeTaken:.8f} seconds.")
+    sampleValue =values[random.randint(0, totalValues - 1)]
     print("Sample value to count:", sampleValue)
-    print(f"Count of value {sampleValue} in the tree:", tree.count(sampleValue))
-    print("Finding value 99999 in the tree:", tree.find(99999))
-    print(f"Count of value 99999 in the tree:", tree.count(99999))
+    countOf, timeTaken = timeFunction(tree.count, sampleValue)
+    print(f"Count of value {sampleValue} in the tree is {countOf}. Computed in {timeTaken:.8f} seconds.")
+    x, timeTaken = timeFunction(tree.count, 99999)
+    print(f"Count of value 99999 in the tree is {x}. Computed in {timeTaken:.8f} seconds.")
 
 

@@ -9,6 +9,14 @@ class Node:
 class BinaryTree:
     root = None
 
+    def __init__(self, values=None):
+        if values is not None:
+            for value in values:
+                self.insert(Node(value))
+
+        else:
+            self.root = None
+
     def insert_recursive(self, currentNode, newNode):
         if currentNode.value == newNode.value:
             currentNode.count += 1
@@ -30,3 +38,24 @@ class BinaryTree:
             self.root = newNode
         else:
             self.insert_recursive(self.root, newNode)
+
+    def count_recursive(self, currentNode, value):
+        if currentNode is None:
+            return 0
+
+        if currentNode.value == value:
+            return currentNode.count
+        
+        elif value < currentNode.value:
+            return self.count_recursive(currentNode.left, value)
+        
+        else:
+            return self.count_recursive(currentNode.right, value)
+
+        
+    def find(self, value):
+        currentNode = self.root
+        return (self.count_recursive(currentNode, value) > 0)
+    
+    def count(self, value):
+        return self.count_recursive(self.root, value)

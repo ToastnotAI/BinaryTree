@@ -120,6 +120,37 @@ class TestBinaryTree(unittest.TestCase):
         self.assertIsNone(tree.root.right)
         self.assertEqual(tree.root.count, 2)
 
-    
+    def test_initialize_tree_with_list(self):
+        values = [15, 10, 20, 5]
+        tree = BinaryTree(values)
+        self.assertEqual(tree.root.value, 15)
+        self.assertEqual(tree.root.left.value, 10)
+        self.assertEqual(tree.root.right.value, 20)
+        self.assertEqual(tree.root.left.left.value, 5)
 
+    def test_initialize_tree_with_empty_list(self):
+        values = []
+        tree = BinaryTree(values)
+        self.assertIsNone(tree.root)
+
+    def test_find_node_in_tree(self):
+        values = [40, 20, 60, 10, 30, 50, 70]
+        tree = BinaryTree(values)
+        found = tree.find(30)
+        not_found = tree.find(100)
+
+        self.assertTrue(found)        
+        self.assertFalse(not_found)
+
+    def test_count_instances_of_value(self):
+        tree = BinaryTree()
+        tree.insert(Node(25))
+        tree.insert(Node(25))
+        tree.insert(Node(30))
+        tree.insert(Node(25))
+
+        self.assertEqual(tree.count(25), 3)
+        self.assertEqual(tree.count(30), 1)
+        self.assertEqual(tree.count(40), 0)
+    
         

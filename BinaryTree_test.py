@@ -6,7 +6,7 @@ class TestBinaryTree(unittest.TestCase):
         try:
             from BinaryTree import BinaryTree
         except ImportError as e:
-            self.fail(f"Importing BinaryTree or Node failed with error: {e}")
+            self.fail(f"Importing BinaryTree failed with error: {e}")
 
 
 class TestBinaryTreeNode(unittest.TestCase):

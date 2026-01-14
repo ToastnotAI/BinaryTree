@@ -52,11 +52,23 @@ class BinaryTree:
         
         else:
             return self.count_recursive(currentNode.right, value)
+        
+    def find_recursive(self, currentNode, value):
+        if currentNode is None:
+            return False
+        
+        if currentNode.value == value:
+            return currentNode
+        
+        elif value < currentNode.value:
+            return self.find_recursive(currentNode.left, value)
+        else:
+            return self.find_recursive(currentNode.right, value)
 
         
     def find(self, value):
-        currentNode = self.root
-        return (self.count_recursive(currentNode, value) > 0)
+        return self.find_recursive(self.root, value)
+
     
     def count(self, value):
         return self.count_recursive(self.root, value)

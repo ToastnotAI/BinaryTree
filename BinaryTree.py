@@ -18,6 +18,7 @@ class BinaryTree:
             self.root = None
 
     def insert_recursive(self, currentNode, newNode):
+        #duplicate nodes increment the count of the node already in the tree
         if currentNode.value == newNode.value:
             currentNode.count += 1
         
@@ -82,7 +83,7 @@ if __name__ == "__main__":
         return result, endTime - startTime
 
     totalValues = 5000
-    values = [random.randint(1, 10000) for _ in range(totalValues)]
+    values = [random.randint(1, 10000000) for _ in range(totalValues)]
     tree, timeTaken = timeFunction(BinaryTree, values)
     print(f"Inserted {totalValues} values into the BinaryTree in {timeTaken:.6f} seconds.")
     longestPath, timeTaken = timeFunction(tree.longest_path)

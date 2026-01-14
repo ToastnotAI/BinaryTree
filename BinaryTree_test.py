@@ -182,4 +182,10 @@ class TestBinaryTree(unittest.TestCase):
         longest_path = tree.longest_path()
         self.assertEqual(longest_path, 5)  # Path: 10 -> 20 -> 30 -> 40 -> 50
     
-        
+    def test_search_function_returns_node(self):
+        values = [15, 10, 20, 8, 12, 17, 25]
+        tree = BinaryTree(values)
+        expected_node = Node(17)
+        found = tree.find(17)
+        self.assertEqual (expected_node, found)
+

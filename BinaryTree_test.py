@@ -194,3 +194,52 @@ class TestBinaryTree(unittest.TestCase):
         tree = BinaryTree(values)
         found = tree.find(99)
         self.assertFalse(found)
+
+    def test_get_balance_factor_from_root_right_imbalance(self):
+        values = [1,2,3,4,5]
+        tree = BinaryTree(values)
+        factor = tree.get_balance_factor(tree.root)
+        self.assertEqual(factor, -4)
+
+    def test_get_balance_factor_from_root_left_imbalance(self):
+        values = [5,4,3,2,1]
+        tree = BinaryTree(values)
+        factor = tree.get_balance_factor(tree.root)
+        self.assertEqual(factor, 4)
+
+    def test_get_balance_factor_no_imbalance(self):
+        values = [2,1,3]
+        tree = BinaryTree(values)
+        factor = tree.get_balance_factor(tree.root)
+        self.assertEqual(factor, 0)
+
+    def test_balance_tree_right_imbalance(self):
+        values = [1,2,3,4,5]
+        tree = BinaryTree(values)
+        tree.balance_tree(tree.root)
+        factor = abs(tree.get_balance_factor(tree.root))
+        self.assertLessEqual(factor, 1)
+
+    def test_balance_tree_left_imbalance(self):
+        values = [5,4,3,2,1]
+        tree = BinaryTree(values)
+        tree.balance_tree(tree.root)
+        factor = abs(tree.get_balance_factor(tree.root))
+        self.assertLessEqual(factor, 1)
+
+    def test_balance_tree_both_imbalance(self):
+        values = [5,6,7,8,9,10,4,3,2,1]
+        tree = BinaryTree(values)
+        tree.balance_tree(tree.root)
+        factor = abs(tree.get_balance_factor(tree.root))
+        self.assertLessEqual(factor, 1)
+    
+    def test_balance_tree_mixed_imbalance(self):
+        values = [5,9,6,8,7,5,1,2,4,3]
+        tree = BinaryTree(values)
+        print(tree)
+        tree.balance_tree(tree.root)
+        factor = abs(tree.get_balance_factor(tree.root))
+        self.assertLessEqual(factor, 1)
+        print(tree)
+        

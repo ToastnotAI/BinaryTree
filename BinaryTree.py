@@ -13,9 +13,18 @@ class BinaryTree:
         if values is not None:
             for value in values:
                 self.insert(Node(value))
-
         else:
-            self.root = None
+            self.root = None                        
+
+    def check_tree_balance(self, currentNode):
+        pass
+
+    def get_balance_factor(self, currentNode):
+        leftDepth = self.longest_path_recursive(currentNode.left)
+        rightDepth = self.longest_path_recursive(currentNode.right)
+        return leftDepth - rightDepth
+            
+
 
     def insert_recursive(self, currentNode, newNode):
         if currentNode.value == newNode.value:
@@ -60,16 +69,16 @@ class BinaryTree:
     def count(self, value):
         return self.count_recursive(self.root, value)
 
-    def longest_path_recursive(self, currentNode, currentDepth):
+    def longest_path_recursive(self, currentNode):
         if currentNode is None:
-            return currentDepth - 1
-        
-        leftDepth = self.longest_path_recursive(currentNode.left, currentDepth + 1)
-        rightDepth = self.longest_path_recursive(currentNode.right, currentDepth + 1)
-        return max(leftDepth, rightDepth)
+            return 0
+
+        leftDepth = self.longest_path_recursive(currentNode.left)
+        rightDepth = self.longest_path_recursive(currentNode.right)
+        return 1 + max(leftDepth, rightDepth)
 
     def longest_path(self):
-        return self.longest_path_recursive(self.root, 1)
+        return self.longest_path_recursive(self.root)
 
 
 if __name__ == "__main__":
@@ -81,8 +90,8 @@ if __name__ == "__main__":
         endTime = time.time()
         return result, endTime - startTime
 
-    totalValues = 5000
-    values = [random.randint(1, 10000) for _ in range(totalValues)]
+    totalValues = 50000000
+    values = [random.randint(1, 10000000) for _ in range(totalValues)]
     tree, timeTaken = timeFunction(BinaryTree, values)
     print(f"Inserted {totalValues} values into the BinaryTree in {timeTaken:.6f} seconds.")
     longestPath, timeTaken = timeFunction(tree.longest_path)
